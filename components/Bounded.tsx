@@ -8,10 +8,7 @@ const Bounded = ({
 }: BoundedProps) => {
   return (
     <Comp
-      className={clsx(
-        'px-3 py-5 md:px-5 lg:px-8 space-y-5 md:space-y-10',
-        className,
-      )}
+      className={clsx('px-5 py-5 lg:px-8 space-y-5 md:space-y-10', className)}
     >
       {children}
     </Comp>

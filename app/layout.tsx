@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { instrument_sans, libre, valentino } from '@/lib/fonts';
+import { intrepid, libre } from '@/lib/fonts';
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${valentino.variable} ${instrument_sans.variable} ${libre.variable}`}
-      >
+      <body className={`${libre.variable} ${intrepid.variable}`}>
         {children}
       </body>
     </html>
