@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import '../globals.css';
 import { SanityLive } from '@/sanity/lib/live';
 
@@ -8,7 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <main>
-      {children} <SanityLive />
+      <Header />
+      {children}
+      <SanityLive />
     </main>
   );
 }
