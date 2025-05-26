@@ -276,8 +276,49 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: lib/queries.ts
 // Variable: ALL_PRODUCTS_QUERY
-// Query: *[_type == 'product'        && defined(slug.current)]         | order(dateAdded desc){           name,           mainImage[]{             asset->{url},             alt           },           slug,           price,           colors[]->{             colorName           }         }
+// Query: *[_type == 'product'    && defined(slug.current)]     | order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       }}
 export type ALL_PRODUCTS_QUERYResult = Array<{
+  name: string | null;
+  mainImage: Array<{
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  }> | null;
+  slug: Slug | null;
+  price: number | null;
+  colors: Array<{
+    colorName: string | null;
+  }> | null;
+}>;
+// Variable: PRODUCT_QUERY
+// Query: *[_type == 'product'  && slug.current == $slug][0]{     name,     mainImage[]{       asset->{url},       alt     },     slug,     _id,     price,     colors[]->{       colorName     },     sizes[]->{      name     },     desc,     categories[]->{      name,      _id,     },}
+export type PRODUCT_QUERYResult = {
+  name: string | null;
+  mainImage: Array<{
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  }> | null;
+  slug: Slug | null;
+  _id: string;
+  price: number | null;
+  colors: Array<{
+    colorName: string | null;
+  }> | null;
+  sizes: Array<{
+    name: string | null;
+  }> | null;
+  desc: BlockContent | null;
+  categories: Array<{
+    name: string | null;
+    _id: string;
+  }> | null;
+} | null;
+// Variable: RELATED_PRODUCTS_QUERY
+// Query: *[_type == 'product'  && defined(slug.current)  && _id != $currentProductId  && count(categories[@._ref in $categoryIds]) > 0 ]   | order(dateAdded desc){     name,     mainImage[]{       asset->{url},       alt     },     slug,     price,     colors[]->{       colorName     }}
+export type RELATED_PRODUCTS_QUERYResult = Array<{
   name: string | null;
   mainImage: Array<{
     asset: {
@@ -296,6 +337,8 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == 'product'\n        && defined(slug.current)]\n         | order(dateAdded desc){\n           name,\n           mainImage[]{\n             asset->{url},\n             alt\n           },\n           slug,\n           price,\n           colors[]->{\n             colorName\n           }\n         }": ALL_PRODUCTS_QUERYResult;
+    "*[_type == 'product'\n    && defined(slug.current)]\n     | order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       }\n}": ALL_PRODUCTS_QUERYResult;
+    "*[_type == 'product'\n  && slug.current == $slug][0]{\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     _id,\n     price,\n     colors[]->{\n       colorName\n     },\n     sizes[]->{\n      name\n     },\n     desc,\n     categories[]->{\n      name,\n      _id,\n     },\n}": PRODUCT_QUERYResult;
+    "*[_type == 'product'\n  && defined(slug.current)\n  && _id != $currentProductId\n  && count(categories[@._ref in $categoryIds]) > 0 ]\n   | order(dateAdded desc){\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     price,\n     colors[]->{\n       colorName\n     }\n}": RELATED_PRODUCTS_QUERYResult;
   }
 }

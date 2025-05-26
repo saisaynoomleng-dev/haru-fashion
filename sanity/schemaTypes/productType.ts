@@ -45,7 +45,7 @@ export const productType = defineType({
       title: 'Product Price',
       type: 'number',
       initialValue: 50,
-      validation: (rule) => rule.required().min(50),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'desc',
@@ -99,14 +99,13 @@ export const productType = defineType({
   preview: {
     select: {
       name: 'name',
-      category: 'category.0',
       price: 'price',
       image: 'mainImage.0.asset',
     },
-    prepare({ name, category, price, image }) {
+    prepare({ name, price, image }) {
       return {
-        title: `${name} • ${category}`,
-        subtitle: `Price: ${price}`,
+        title: `${name}`,
+        subtitle: `Price: $${price}`,
         media: image,
       };
     },

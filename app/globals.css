@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,9 +120,8 @@
   --color-brand-gray: #737373;
 
   /* font families */
-  --font-instrument: var(--font-instrument);
-  --font-valentino: var(--font-valentino);
   --font-libre: var(--font-libre);
+  --font-intrepid: var(--font-intrepid);
 
   /* font sizes */
   --text-fs-900: 9rem;
@@ -144,9 +144,20 @@
     @apply scroll-smooth;
   }
   body {
-    @apply font-instrument text-fs-300;
+    @apply font-intrepid text-fs-300 bg-brand-white leading-normal tracking-normal overflow-x-hidden;
   }
   p {
     @apply text-pretty;
   }
+}
+
+/* Hide scrollbar for Webkit browsers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
