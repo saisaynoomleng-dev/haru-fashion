@@ -1,4 +1,4 @@
-import { FaTshirt } from 'react-icons/fa';
+import { FaRegNewspaper, FaTshirt } from 'react-icons/fa';
 import { IoPricetagOutline } from 'react-icons/io5';
 import type { StructureResolver } from 'sanity/structure';
 
@@ -11,4 +11,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('category')
         .title('Categories')
         .icon(IoPricetagOutline),
+      S.documentTypeListItem('newsletter')
+        .title('Newsletter Subscriptions')
+        .icon(FaRegNewspaper),
     ]);

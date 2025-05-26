@@ -2,7 +2,7 @@ import Bounded from '@/components/Bounded';
 import ProductCard from '@/components/ProductCard';
 import ProductImages from '@/components/ProductImages';
 import Title from '@/components/Title';
-import { PRODUCT_QUERY, RELATED_PRODUCTS_QUERY } from '@/lib/queries';
+import { PRODUCT_QUERY, RELATED_PRODUCTS_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import { PortableText } from 'next-sanity';
 import Link from 'next/link';
