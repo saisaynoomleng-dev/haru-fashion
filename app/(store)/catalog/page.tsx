@@ -1,7 +1,7 @@
 import Bounded from '@/components/Bounded';
 import ProductCard from '@/components/ProductCard';
 import Title from '@/components/Title';
-import { ALL_PRODUCTS_QUERY } from '@/lib/queries';
+import { ALL_PRODUCTS_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import clsx from 'clsx';
 import Link from 'next/link';
