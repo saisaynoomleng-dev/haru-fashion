@@ -36,7 +36,7 @@ const CatalogPage = async ({
 
       {/* filter */}
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
         {products.map((product) => (
           <ProductCard key={product.slug?.current} {...product} />
         ))}

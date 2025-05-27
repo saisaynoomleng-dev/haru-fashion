@@ -122,6 +122,7 @@
   /* font families */
   --font-libre: var(--font-libre);
   --font-intrepid: var(--font-intrepid);
+  --font-poiret: var(--font-poiret);
 
   /* font sizes */
   --text-fs-900: 9rem;
@@ -144,7 +145,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply font-intrepid text-fs-300 bg-brand-white leading-normal tracking-normal overflow-x-hidden;
+    @apply font-poiret text-fs-300 bg-brand-white leading-normal tracking-normal overflow-x-hidden;
   }
   p {
     @apply text-pretty;
@@ -160,4 +161,8 @@
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+}
+
+@utility add-padding {
+  @apply px-5 md:px-8 lg:px-10;
 }

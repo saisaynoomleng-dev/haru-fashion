@@ -13,7 +13,7 @@ const SanityImage = ({
   className?: string;
 }) => {
   return (
-    <div className="overflow-hidden max-w-fit">
+    <div className="overflow-hidden">
       <Image
         src={urlFor(imageUrl).width(400).height(400).format('webp').url()}
         width={300}

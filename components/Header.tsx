@@ -41,7 +41,7 @@ const Header = () => {
 
       <div className="flex justify-between gap-2 items-center">
         {/* search form */}
-        <Form action="/search">
+        <Form action="/search" className="max-w-[180px]">
           <label htmlFor="search" className="sr-only">
             Search Anything
           </label>
@@ -70,8 +70,8 @@ const Header = () => {
           role="navigation"
           className={clsx(
             'flex gap-3',
-            'max-md:fixed max-md:flex-col max-md:inset-0 max-md:justify-center max-md:items-center max-md:bg-blue-300 max-md:z-20 transition-all duration-300 ease',
-            navOpen ? 'max-md:translate-y-0' : 'max-md:-translate-y-full',
+            'max-md:fixed max-md:flex-col max-md:inset-0 max-md:left-[10vw] max-md:bg-brand-white  max-md:justify-center max-md:items-center max-md:z-20 transition-all duration-300 ease',
+            navOpen ? 'max-md:translate-x-0' : 'max-md:translate-x-full',
           )}
         >
           {NAV_LINKS.map((link) => (
