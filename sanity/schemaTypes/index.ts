@@ -6,6 +6,7 @@ import { blockContentType } from './utilTypes/blockContent';
 import { categoryType } from './utilTypes/categoryType';
 import { brandType } from './utilTypes/brandType';
 import { newsletterType } from './newsletterType';
+import { historyType } from './historyType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -16,5 +17,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     categoryType,
     brandType,
     newsletterType,
+    historyType,
   ],
 };

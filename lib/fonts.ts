@@ -13,3 +13,10 @@ export const intrepid = localFont({
   weight: '400',
   variable: '--font-intrepid',
 });
+
+export const poiret_one = localFont({
+  src: '../app/fonts/PoiretOne/PoiretOne.ttf',
+  style: 'normal',
+  weight: '400',
+  variable: '--font-poiret',
+});

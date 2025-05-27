@@ -54,3 +54,18 @@ export const RELATED_PRODUCTS_QUERY = defineQuery(`*[_type == 'product'
        colorName
      }
 }`);
+
+export const HISTORY_QUERY = defineQuery(`*[_type == 'history'
+  && defined(slug.current)][0]{
+   title,
+   slug,
+   histories[]{
+     title,
+     desc,
+     year,
+     mainImage{
+       asset->{url},
+     alt
+     }
+   }
+  }`);

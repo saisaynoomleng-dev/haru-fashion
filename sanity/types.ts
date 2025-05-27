@@ -68,6 +68,44 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type History = {
+  _id: string;
+  _type: 'history';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  histories?: Array<{
+    title?: string;
+    desc?: string;
+    year?: number;
+    mainImage?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: 'image';
+    };
+    _key: string;
+  }>;
+};
+
+export type Newsletter = {
+  _id: string;
+  _type: 'newsletter';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  email?: string;
+};
+
 export type Brand = {
   _id: string;
   _type: 'brand';
@@ -261,6 +299,8 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | History
+  | Newsletter
   | Brand
   | Category
   | BlockContent
@@ -274,7 +314,7 @@ export type AllSanitySchemaTypes =
   | SanityImageMetadata
   | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: lib/queries.ts
+// Source: sanity/lib/queries.ts
 // Variable: ALL_PRODUCTS_QUERY
 // Query: *[_type == 'product'    && defined(slug.current)]     | order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       }}
 export type ALL_PRODUCTS_QUERYResult = Array<{
@@ -332,6 +372,23 @@ export type RELATED_PRODUCTS_QUERYResult = Array<{
     colorName: string | null;
   }> | null;
 }>;
+// Variable: HISTORY_QUERY
+// Query: *[_type == 'history'  && defined(slug.current)][0]{   title,   slug,   histories[]{     title,     desc,     year,     mainImage{       asset->{url},     alt     }   }  }
+export type HISTORY_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  histories: Array<{
+    title: string | null;
+    desc: string | null;
+    year: number | null;
+    mainImage: {
+      asset: {
+        url: string | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  }> | null;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -340,5 +397,6 @@ declare module '@sanity/client' {
     "*[_type == 'product'\n    && defined(slug.current)]\n     | order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       }\n}": ALL_PRODUCTS_QUERYResult;
     "*[_type == 'product'\n  && slug.current == $slug][0]{\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     _id,\n     price,\n     colors[]->{\n       colorName\n     },\n     sizes[]->{\n      name\n     },\n     desc,\n     categories[]->{\n      name,\n      _id,\n     },\n}": PRODUCT_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)\n  && _id != $currentProductId\n  && count(categories[@._ref in $categoryIds]) > 0 ]\n   | order(dateAdded desc){\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     price,\n     colors[]->{\n       colorName\n     }\n}": RELATED_PRODUCTS_QUERYResult;
+    "*[_type == 'history'\n  && defined(slug.current)][0]{\n   title,\n   slug,\n   histories[]{\n     title,\n     desc,\n     year,\n     mainImage{\n       asset->{url},\n     alt\n     }\n   }\n  }": HISTORY_QUERYResult;
   }
 }

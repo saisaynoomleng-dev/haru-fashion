@@ -33,7 +33,7 @@ const ProductDetailPage = async ({
     <Bounded className="grid sm:grid-cols-[auto_1fr] gap-3 md:gap-5">
       {product?.mainImage && <ProductImages images={product.mainImage} />}
 
-      <div className="flex flex-col gap-2 md:max-w-[85%] lg:max-w-[60%] px-6 md:px-8">
+      <div className="flex flex-col gap-2 md:max-w-[85%] lg:max-w-[80%] px-6 md:px-8">
         <Link
           href="/catalog"
           className="text-fs-200 uppercase flex gap-2 group items-center"
@@ -90,11 +90,7 @@ const ProductDetailPage = async ({
       )}
 
       <div className="space-y-3 md:space-y-5 col-span-full">
-        <Title
-          as="h3"
-          size="sm"
-          className="underline underline-offset-2 decoration-blue-500"
-        >
+        <Title as="h3" size="sm" className="underline underline-offset-2 ">
           Related Products
         </Title>
         <div className="flex gap-2 overflow-x-scroll max-w-screen">
