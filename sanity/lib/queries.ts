@@ -69,3 +69,43 @@ export const HISTORY_QUERY = defineQuery(`*[_type == 'history'
      }
    }
   }`);
+
+export const LOOKBOOKS_QUERY = defineQuery(`*[_type == 'lookbook'
+  && defined(slug.current)]
+ | order(publishedAt desc){
+   title,
+     slug,
+     subtitle,
+     publishedAt,
+     category->{
+       name
+     },
+     mainImage{
+     asset->{url},
+       alt
+     }
+  }`);
+
+export const LOOKBOOK_QUERY = defineQuery(`*[_type == 'lookbook'
+  && slug.current == $slug][0]{
+   title,
+     slug,
+     subtitle,
+     author->{
+      name,
+      desc,
+      mainImage{
+        asset->{url},
+        alt
+      }
+     },
+     publishedAt,
+     category->{
+       name
+     },
+     mainImage{
+     asset->{url},
+       alt
+     },
+     desc
+  }`);

@@ -189,7 +189,7 @@ const AboutUsPage = async () => {
 
       {history && <Hisotry history={history} />}
 
-      <div className="grid gap-2 add-padding text-fs-200 md:grid-cols-3">
+      <div className="grid gap-2 add-padding text-fs-200 md:grid-cols-3 px-5">
         <Title
           as="h3"
           size="md"
@@ -206,7 +206,7 @@ const AboutUsPage = async () => {
         </p>
 
         <div className="flex flex-col gap-2 md:col-start-2 md:col-end-3">
-          <div>
+          <div className="max-md:place-self-center">
             <Image
               src="/about-hero-5.jpg"
               alt=""

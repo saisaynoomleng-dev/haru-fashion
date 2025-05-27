@@ -1,0 +1,37 @@
+import { LOOKBOOKS_QUERYResult } from '@/sanity/types';
+import clsx from 'clsx';
+import Link from 'next/link';
+import SanityImage from './SanityImage';
+import { formatDate } from '@/lib/utils';
+
+const LookbookCard = ({
+  className,
+  ...props
+}: { className?: string } & NonNullable<LOOKBOOKS_QUERYResult>[number]) => {
+  const { slug, title, subtitle, category, mainImage, publishedAt } = props;
+  return (
+    <Link
+      href={`/look-book/${slug?.current}`}
+      className={clsx('flex gap-3 group', className)}
+    >
+      {mainImage?.asset?.url && (
+        <SanityImage
+          imageUrl={mainImage.asset.url}
+          alt={mainImage.alt as string}
+          className="group-hover:opacity-90"
+        />
+      )}
+
+      <div className="flex flex-col gap-5">
+        <p>{category?.name}</p>
+        <p className="uppercase text-fs-400">{title}</p>
+        <p className="text-brand-black/50">
+          {publishedAt && formatDate(publishedAt)}
+        </p>
+        <p className="text-fs-200">{subtitle}</p>
+      </div>
+    </Link>
+  );
+};
+
+export default LookbookCard;

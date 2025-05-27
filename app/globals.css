@@ -163,6 +163,6 @@
   -ms-overflow-style: none; /* IE and Edge */
 }
 
-@utility add-padding {
+.add-padding {
   @apply px-5 md:px-8 lg:px-10;
 }
