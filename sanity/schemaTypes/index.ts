@@ -7,6 +7,9 @@ import { categoryType } from './utilTypes/categoryType';
 import { brandType } from './utilTypes/brandType';
 import { newsletterType } from './newsletterType';
 import { historyType } from './historyType';
+import { lookbookType } from './lookbookType';
+import { carouselType } from './utilTypes/carouselType';
+import { authorType } from './utilTypes/authorType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -18,5 +21,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     brandType,
     newsletterType,
     historyType,
+    lookbookType,
+    carouselType,
+    authorType,
   ],
 };

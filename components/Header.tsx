@@ -41,7 +41,7 @@ const Header = () => {
 
       <div className="flex justify-between gap-2 items-center">
         {/* search form */}
-        <Form action="/search" className="max-w-[180px]">
+        <Form action="/search" className="max-w-[120px]">
           <label htmlFor="search" className="sr-only">
             Search Anything
           </label>

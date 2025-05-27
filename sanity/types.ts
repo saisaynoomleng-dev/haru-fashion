@@ -68,6 +68,122 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Carousel = {
+  _type: 'carousel';
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+    _key: string;
+  }>;
+};
+
+export type Lookbook = {
+  _id: string;
+  _type: 'lookbook';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  subtitle?: string;
+  publishedAt?: string;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'author';
+  };
+  category?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'category';
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+  desc?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Carousel)
+  >;
+};
+
+export type Author = {
+  _id: string;
+  _type: 'author';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  desc?: string;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+};
+
 export type History = {
   _id: string;
   _type: 'history';
@@ -159,6 +275,9 @@ export type BlockContent = Array<
       _type: 'image';
       _key: string;
     }
+  | ({
+      _key: string;
+    } & Carousel)
 >;
 
 export type Size = {
@@ -299,6 +418,9 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Carousel
+  | Lookbook
+  | Author
   | History
   | Newsletter
   | Brand
@@ -389,6 +511,87 @@ export type HISTORY_QUERYResult = {
     } | null;
   }> | null;
 } | null;
+// Variable: LOOKBOOKS_QUERY
+// Query: *[_type == 'lookbook'  && defined(slug.current)] | order(publishedAt desc){   title,     slug,     subtitle,     publishedAt,     category->{       name     },     mainImage{     asset->{url},       alt     }  }
+export type LOOKBOOKS_QUERYResult = Array<{
+  title: string | null;
+  slug: Slug | null;
+  subtitle: string | null;
+  publishedAt: string | null;
+  category: {
+    name: string | null;
+  } | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+}>;
+// Variable: LOOKBOOK_QUERY
+// Query: *[_type == 'lookbook'  && slug.current == $slug][0]{   title,     slug,     subtitle,     author->{      name,      desc,      mainImage{        asset->{url},        alt      }     },     publishedAt,     category->{       name     },     mainImage{     asset->{url},       alt     },     desc  }
+export type LOOKBOOK_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  subtitle: string | null;
+  author: {
+    name: string | null;
+    desc: string | null;
+    mainImage: {
+      asset: {
+        url: string | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+  publishedAt: string | null;
+  category: {
+    name: string | null;
+  } | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+  desc: Array<
+    | ({
+        _key: string;
+      } & Carousel)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+  > | null;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -398,5 +601,7 @@ declare module '@sanity/client' {
     "*[_type == 'product'\n  && slug.current == $slug][0]{\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     _id,\n     price,\n     colors[]->{\n       colorName\n     },\n     sizes[]->{\n      name\n     },\n     desc,\n     categories[]->{\n      name,\n      _id,\n     },\n}": PRODUCT_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)\n  && _id != $currentProductId\n  && count(categories[@._ref in $categoryIds]) > 0 ]\n   | order(dateAdded desc){\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     price,\n     colors[]->{\n       colorName\n     }\n}": RELATED_PRODUCTS_QUERYResult;
     "*[_type == 'history'\n  && defined(slug.current)][0]{\n   title,\n   slug,\n   histories[]{\n     title,\n     desc,\n     year,\n     mainImage{\n       asset->{url},\n     alt\n     }\n   }\n  }": HISTORY_QUERYResult;
+    "*[_type == 'lookbook'\n  && defined(slug.current)]\n | order(publishedAt desc){\n   title,\n     slug,\n     subtitle,\n     publishedAt,\n     category->{\n       name\n     },\n     mainImage{\n     asset->{url},\n       alt\n     }\n  }": LOOKBOOKS_QUERYResult;
+    "*[_type == 'lookbook'\n  && slug.current == $slug][0]{\n   title,\n     slug,\n     subtitle,\n     author->{\n      name,\n      desc,\n      mainImage{\n        asset->{url},\n        alt\n      }\n     },\n     publishedAt,\n     category->{\n       name\n     },\n     mainImage{\n     asset->{url},\n       alt\n     },\n     desc\n  }": LOOKBOOK_QUERYResult;
   }
 }
