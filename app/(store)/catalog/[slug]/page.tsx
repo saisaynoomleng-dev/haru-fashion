@@ -30,7 +30,7 @@ const ProductDetailPage = async ({
   });
 
   return (
-    <Bounded className="grid sm:grid-cols-[auto_1fr] gap-3 md:gap-5">
+    <Bounded className="grid sm:grid-cols-[auto_1fr] gap-3 md:gap-5 add-padding">
       {product?.mainImage && <ProductImages images={product.mainImage} />}
 
       <div className="flex flex-col gap-2 md:max-w-[85%] lg:max-w-[80%] px-6 md:px-8">
