@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 const NAV_LINKS = [
   { title: 'About Us', url: '/about-us' },
   { title: 'Look Book', url: '/look-book' },
-  { title: 'Favorite', url: '/favorite' },
-  { title: 'Bag', url: '/bag' },
+  { title: 'Favorite', url: '/account/favorite' },
+  { title: 'Bag', url: '/account/order' },
   { title: 'Contact', url: '/contact' },
   { title: 'Account', url: '/account' },
 ];
@@ -45,7 +45,12 @@ const Header = () => {
           <label htmlFor="search" className="sr-only">
             Search Anything
           </label>
-          <Input name="query" id="search" placeholder="Search..." />
+          <Input
+            name="query"
+            id="search"
+            placeholder="Search"
+            className="border rounded-sm w-[70%] ml-auto focus:w-full transition-all duration-500 ease"
+          />
         </Form>
 
         <button

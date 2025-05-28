@@ -11,6 +11,8 @@ import { lookbookType } from './lookbookType';
 import { carouselType } from './utilTypes/carouselType';
 import { authorType } from './utilTypes/authorType';
 import { contactType } from './contactType';
+import { termsType } from './termsType';
+import { faqType } from './faqType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -26,5 +28,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     carouselType,
     authorType,
     contactType,
+    termsType,
+    faqType,
   ],
 };

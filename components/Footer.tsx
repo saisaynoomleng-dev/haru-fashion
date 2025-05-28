@@ -26,8 +26,9 @@ const SUPPORT_LINKS = [
 ];
 
 const LEGAL_LINKS = [
-  { title: 'Privacy and Cookie Policy', url: '/privacy-policy' },
+  { title: 'Privacy Policy', url: '/privacy-policy' },
   { title: 'Terms and Conditions', url: '/terms-and-conditions' },
+  { title: 'Cookie Policy', url: '/cookie-policy' },
 ];
 
 const Footer = () => {

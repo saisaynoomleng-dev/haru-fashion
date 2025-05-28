@@ -109,3 +109,39 @@ export const LOOKBOOK_QUERY = defineQuery(`*[_type == 'lookbook'
      },
      desc
   }`);
+
+export const TERMS_AND_CONDITIONS_QUERY = defineQuery(`*[_type == 'terms' &&
+  slug.current == 'users-terms-and-conditions'][0]{
+   title,
+   slug,
+   desc
+  }`);
+
+export const PRIVACY_POLICY_QUERY = defineQuery(`*[_type == 'terms' &&
+  slug.current == 'privacy-policy'][0]{
+   title,
+   slug,
+   desc
+  }`);
+
+export const RETURN_POLICY_QUERY = defineQuery(`*[_type == 'terms' &&
+  slug.current == 'return-policy'][0]{
+   title,
+   slug,
+   desc
+  }`);
+
+export const COOKIE_POLICY_QUERY = defineQuery(`*[_type == 'terms' &&
+  slug.current == 'cookie-policy'][0]{
+   title,
+   slug,
+   desc
+  }`);
+
+export const MAIN_FAQ_QUERY = defineQuery(`*[_type == 'faq'
+  && slug.current == 'main-faqs'][0]{
+   faqs[]{
+     question,
+     answer
+   }
+  }`);
