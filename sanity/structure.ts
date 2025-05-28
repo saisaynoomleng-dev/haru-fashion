@@ -1,3 +1,4 @@
+import { LucidePhoneIncoming } from 'lucide-react';
 import { FaBookOpen, FaClock, FaRegNewspaper, FaTshirt } from 'react-icons/fa';
 import { IoPricetagOutline } from 'react-icons/io5';
 import type { StructureResolver } from 'sanity/structure';
@@ -16,4 +17,7 @@ export const structure: StructureResolver = (S) =>
         .icon(FaRegNewspaper),
       S.documentTypeListItem('history').title('Histories').icon(FaClock),
       S.documentTypeListItem('lookbook').title('Lookbooks').icon(FaBookOpen),
+      S.documentTypeListItem('contact')
+        .title('Contact Lists')
+        .icon(LucidePhoneIncoming),
     ]);

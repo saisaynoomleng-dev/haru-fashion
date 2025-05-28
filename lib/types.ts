@@ -17,4 +17,5 @@ export type TitleProps = {
 export type PrevFormStateProps = {
   state: string;
   message: string;
+  field?: string;
 };
