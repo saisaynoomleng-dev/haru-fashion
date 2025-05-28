@@ -68,6 +68,82 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Faq = {
+  _id: string;
+  _type: 'faq';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  faqs?: Array<{
+    question?: string;
+    answer?: string;
+    _type: 'faq';
+    _key: string;
+  }>;
+};
+
+export type Terms = {
+  _id: string;
+  _type: 'terms';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  desc?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Carousel)
+  >;
+};
+
+export type Contact = {
+  _id: string;
+  _type: 'contact';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+};
+
 export type Carousel = {
   _type: 'carousel';
   images?: Array<{
@@ -418,6 +494,9 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Faq
+  | Terms
+  | Contact
   | Carousel
   | Lookbook
   | Author
@@ -592,6 +671,186 @@ export type LOOKBOOK_QUERYResult = {
       }
   > | null;
 } | null;
+// Variable: TERMS_AND_CONDITIONS_QUERY
+// Query: *[_type == 'terms' &&  slug.current == 'users-terms-and-conditions'][0]{   title,   slug,   desc  }
+export type TERMS_AND_CONDITIONS_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  desc: Array<
+    | ({
+        _key: string;
+      } & Carousel)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+  > | null;
+} | null;
+// Variable: PRIVACY_POLICY_QUERY
+// Query: *[_type == 'terms' &&  slug.current == 'privacy-policy'][0]{   title,   slug,   desc  }
+export type PRIVACY_POLICY_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  desc: Array<
+    | ({
+        _key: string;
+      } & Carousel)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+  > | null;
+} | null;
+// Variable: RETURN_POLICY_QUERY
+// Query: *[_type == 'terms' &&  slug.current == 'return-policy'][0]{   title,   slug,   desc  }
+export type RETURN_POLICY_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  desc: Array<
+    | ({
+        _key: string;
+      } & Carousel)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+  > | null;
+} | null;
+// Variable: COOKIE_POLICY_QUERY
+// Query: *[_type == 'terms' &&  slug.current == 'cookie-policy'][0]{   title,   slug,   desc  }
+export type COOKIE_POLICY_QUERYResult = {
+  title: string | null;
+  slug: Slug | null;
+  desc: Array<
+    | ({
+        _key: string;
+      } & Carousel)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+  > | null;
+} | null;
+// Variable: MAIN_FAQ_QUERY
+// Query: *[_type == 'faq'  && slug.current == 'main-faqs'][0]{   faqs[]{     question,     answer   }  }
+export type MAIN_FAQ_QUERYResult = {
+  faqs: Array<{
+    question: string | null;
+    answer: string | null;
+  }> | null;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -603,5 +862,10 @@ declare module '@sanity/client' {
     "*[_type == 'history'\n  && defined(slug.current)][0]{\n   title,\n   slug,\n   histories[]{\n     title,\n     desc,\n     year,\n     mainImage{\n       asset->{url},\n     alt\n     }\n   }\n  }": HISTORY_QUERYResult;
     "*[_type == 'lookbook'\n  && defined(slug.current)]\n | order(publishedAt desc){\n   title,\n     slug,\n     subtitle,\n     publishedAt,\n     category->{\n       name\n     },\n     mainImage{\n     asset->{url},\n       alt\n     }\n  }": LOOKBOOKS_QUERYResult;
     "*[_type == 'lookbook'\n  && slug.current == $slug][0]{\n   title,\n     slug,\n     subtitle,\n     author->{\n      name,\n      desc,\n      mainImage{\n        asset->{url},\n        alt\n      }\n     },\n     publishedAt,\n     category->{\n       name\n     },\n     mainImage{\n     asset->{url},\n       alt\n     },\n     desc\n  }": LOOKBOOK_QUERYResult;
+    "*[_type == 'terms' &&\n  slug.current == 'users-terms-and-conditions'][0]{\n   title,\n   slug,\n   desc\n  }": TERMS_AND_CONDITIONS_QUERYResult;
+    "*[_type == 'terms' &&\n  slug.current == 'privacy-policy'][0]{\n   title,\n   slug,\n   desc\n  }": PRIVACY_POLICY_QUERYResult;
+    "*[_type == 'terms' &&\n  slug.current == 'return-policy'][0]{\n   title,\n   slug,\n   desc\n  }": RETURN_POLICY_QUERYResult;
+    "*[_type == 'terms' &&\n  slug.current == 'cookie-policy'][0]{\n   title,\n   slug,\n   desc\n  }": COOKIE_POLICY_QUERYResult;
+    "*[_type == 'faq'\n  && slug.current == 'main-faqs'][0]{\n   faqs[]{\n     question,\n     answer\n   }\n  }": MAIN_FAQ_QUERYResult;
   }
 }

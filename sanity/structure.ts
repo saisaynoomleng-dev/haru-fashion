@@ -1,5 +1,12 @@
 import { LucidePhoneIncoming } from 'lucide-react';
-import { FaBookOpen, FaClock, FaRegNewspaper, FaTshirt } from 'react-icons/fa';
+import { CiTextAlignJustify } from 'react-icons/ci';
+import {
+  FaBookOpen,
+  FaClock,
+  FaQuestion,
+  FaRegNewspaper,
+  FaTshirt,
+} from 'react-icons/fa';
 import { IoPricetagOutline } from 'react-icons/io5';
 import type { StructureResolver } from 'sanity/structure';
 
@@ -20,4 +27,6 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('contact')
         .title('Contact Lists')
         .icon(LucidePhoneIncoming),
+      S.documentTypeListItem('terms').title('Terms').icon(CiTextAlignJustify),
+      S.documentTypeListItem('faq').title('FAQs').icon(FaQuestion),
     ]);
