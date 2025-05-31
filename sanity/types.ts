@@ -851,6 +851,24 @@ export type MAIN_FAQ_QUERYResult = {
     answer: string | null;
   }> | null;
 } | null;
+// Variable: SEARCH_QUERY
+// Query: *[_type == 'product'  && defined(slug.current)  && (    (!defined($search)) ||     name match $search ||     categories[]->name match $search ||    colors[]->colorName match $search  )  ] | order(dateAdded desc){    name,    slug,    _id,    mainImage[]{      asset->{url},      alt    },    price,    colors[]->{      colorName    },    category[]{      name    }  }
+export type SEARCH_QUERYResult = Array<{
+  name: string | null;
+  slug: Slug | null;
+  _id: string;
+  mainImage: Array<{
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  }> | null;
+  price: number | null;
+  colors: Array<{
+    colorName: string | null;
+  }> | null;
+  category: null;
+}>;
 
 // Query TypeMap
 import '@sanity/client';
@@ -867,5 +885,6 @@ declare module '@sanity/client' {
     "*[_type == 'terms' &&\n  slug.current == 'return-policy'][0]{\n   title,\n   slug,\n   desc\n  }": RETURN_POLICY_QUERYResult;
     "*[_type == 'terms' &&\n  slug.current == 'cookie-policy'][0]{\n   title,\n   slug,\n   desc\n  }": COOKIE_POLICY_QUERYResult;
     "*[_type == 'faq'\n  && slug.current == 'main-faqs'][0]{\n   faqs[]{\n     question,\n     answer\n   }\n  }": MAIN_FAQ_QUERYResult;
+    "*[_type == 'product'\n  && defined(slug.current)\n  && (\n    (!defined($search)) || \n    name match $search || \n    categories[]->name match $search ||\n    colors[]->colorName match $search\n  )\n  ] | order(dateAdded desc){\n    name,\n    slug,\n    _id,\n    mainImage[]{\n      asset->{url},\n      alt\n    },\n    price,\n    colors[]->{\n      colorName\n    },\n    category[]{\n      name\n    }\n  }": SEARCH_QUERYResult;
   }
 }
