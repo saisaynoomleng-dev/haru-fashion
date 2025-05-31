@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { intrepid, libre } from '@/lib/fonts';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: {
@@ -21,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${libre.variable} ${intrepid.variable}`}>
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

@@ -145,3 +145,28 @@ export const MAIN_FAQ_QUERY = defineQuery(`*[_type == 'faq'
      answer
    }
   }`);
+
+export const SEARCH_QUERY = defineQuery(`*[_type == 'product'
+  && defined(slug.current)
+  && (
+    (!defined($search)) || 
+    name match $search || 
+    categories[]->name match $search ||
+    colors[]->colorName match $search
+  )
+  ] | order(dateAdded desc){
+    name,
+    slug,
+    _id,
+    mainImage[]{
+      asset->{url},
+      alt
+    },
+    price,
+    colors[]->{
+      colorName
+    },
+    category[]{
+      name
+    }
+  }`);

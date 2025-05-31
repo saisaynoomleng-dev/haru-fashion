@@ -18,7 +18,7 @@ const CatalogPage = async ({
   });
 
   const currentPage = parseInt(page || '1', 10);
-  const productsPerPage = 8;
+  const productsPerPage = 12;
   const totalProducts = allProducts.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
