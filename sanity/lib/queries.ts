@@ -170,3 +170,18 @@ export const SEARCH_QUERY = defineQuery(`*[_type == 'product'
       name
     }
   }`);
+
+export const LATEST_PRODUCTS_QUERY = defineQuery(`*[_type == 'product'
+  && defined(slug.current)][0...3] 
+   | order(dateAdded desc){
+     name,
+     slug,
+     mainImage[]{
+       alt,
+       asset->{url}
+     },
+     price,
+     colors[]->{
+       colorName
+     }
+   }`);
