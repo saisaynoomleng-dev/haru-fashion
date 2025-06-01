@@ -12,7 +12,7 @@ const LookbookCard = ({
   return (
     <Link
       href={`/look-book/${slug?.current}`}
-      className={clsx('flex gap-3 group', className)}
+      className={clsx('grid grid-cols-2 gap-3 group', className)}
     >
       {mainImage?.asset?.url && (
         <SanityImage

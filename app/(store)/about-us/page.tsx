@@ -83,7 +83,7 @@ const AboutUsPage = async () => {
           Haru in Numbers
         </p>
 
-        <div className="col-start-2 row-start-2 md:col-start-4 text-fs-200 text-white/50 text-center">
+        <div className="col-start-2 row-start-2 md:col-start-3 text-fs-200 text-white/50 text-center">
           <p>
             <span className="text-fs-400 md:text-fs-500 lg:text-fs-600 text-white">
               500
@@ -113,7 +113,7 @@ const AboutUsPage = async () => {
           <p>Employees worldwide</p>
         </div>
 
-        <div className="col-start-2 row-start-4 md:col-start-3 text-fs-200 text-white/50 text-center">
+        <div className="col-start-2 row-start-4 md:col-start-4 text-fs-200 text-white/50 text-center">
           <p>
             <span className="text-fs-400 md:text-fs-500 lg:text-fs-600 text-white">
               158
@@ -123,7 +123,7 @@ const AboutUsPage = async () => {
           <p>Years of History</p>
         </div>
 
-        <div className="col-start-3 row-start-4 md:col-start-4 text-fs-200 text-white/50 text-center">
+        <div className="col-start-3 row-start-4 md:col-start-6 text-fs-200 text-white/50 text-center">
           <p>
             <span className="text-fs-400 md:text-fs-500 lg:text-fs-600 text-white">
               300
