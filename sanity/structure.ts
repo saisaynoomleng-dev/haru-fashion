@@ -29,4 +29,6 @@ export const structure: StructureResolver = (S) =>
         .icon(LucidePhoneIncoming),
       S.documentTypeListItem('terms').title('Terms').icon(CiTextAlignJustify),
       S.documentTypeListItem('faq').title('FAQs').icon(FaQuestion),
+      S.documentTypeListItem('color').title('COlors'),
+      S.documentTypeListItem('size').title('sizes'),
     ]);
