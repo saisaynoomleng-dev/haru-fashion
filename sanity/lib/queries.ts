@@ -1,8 +1,27 @@
 import { defineQuery } from 'next-sanity';
 
 export const ALL_PRODUCTS_QUERY = defineQuery(`*[_type == 'product'
-    && defined(slug.current)]
-     | order(dateAdded desc){
+    && defined(slug.current)
+    && (
+      (!defined($filter)) ||
+      $filter == null ||
+      $filter in categories[]->slug.current
+    )
+    && (
+      (!defined($color)) ||
+      $color == null ||
+      $color in colors[]->slug.current
+    )
+    && (
+      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&
+      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)
+    )
+    && (
+      (!defined($size)) ||
+      $size == null ||
+      $size in sizes[]->slug.current
+    )
+      ]| order(dateAdded desc){
        name,
        mainImage[]{
          asset->{url},

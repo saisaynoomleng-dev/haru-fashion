@@ -517,7 +517,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: ALL_PRODUCTS_QUERY
-// Query: *[_type == 'product'    && defined(slug.current)]     | order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       }}
+// Query: *[_type == 'product'    && defined(slug.current)    && (      (!defined($filter)) ||      $filter == null ||      $filter in categories[]->slug.current    )    && (      (!defined($color)) ||      $color == null ||      $color in colors[]->slug.current    )    && (      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)    )    && (      (!defined($size)) ||      $size == null ||      $size in sizes[]->slug.current    )      ]| order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       }}
 export type ALL_PRODUCTS_QUERYResult = Array<{
   name: string | null;
   mainImage: Array<{
@@ -890,7 +890,7 @@ export type LATEST_PRODUCTS_QUERYResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == 'product'\n    && defined(slug.current)]\n     | order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       }\n}": ALL_PRODUCTS_QUERYResult;
+    "*[_type == 'product'\n    && defined(slug.current)\n    && (\n      (!defined($filter)) ||\n      $filter == null ||\n      $filter in categories[]->slug.current\n    )\n    && (\n      (!defined($color)) ||\n      $color == null ||\n      $color in colors[]->slug.current\n    )\n    && (\n      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&\n      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)\n    )\n    && (\n      (!defined($size)) ||\n      $size == null ||\n      $size in sizes[]->slug.current\n    )\n      ]| order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       }\n}": ALL_PRODUCTS_QUERYResult;
     "*[_type == 'product'\n  && slug.current == $slug][0]{\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     _id,\n     price,\n     colors[]->{\n       colorName\n     },\n     sizes[]->{\n      name\n     },\n     desc,\n     categories[]->{\n      name,\n      _id,\n     },\n}": PRODUCT_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)\n  && _id != $currentProductId\n  && count(categories[@._ref in $categoryIds]) > 0 ]\n   | order(dateAdded desc){\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     price,\n     colors[]->{\n       colorName\n     }\n}": RELATED_PRODUCTS_QUERYResult;
     "*[_type == 'history'\n  && defined(slug.current)][0]{\n   title,\n   slug,\n   histories[]{\n     title,\n     desc,\n     year,\n     mainImage{\n       asset->{url},\n     alt\n     }\n   }\n  }": HISTORY_QUERYResult;

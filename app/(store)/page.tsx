@@ -70,7 +70,7 @@ export default async function Home() {
       <div className="bg-brand-black text-brand-white grid grid-cols-6 gap-3 p-5 uppercase text-fs-300 grid-rows-[200px_200px_200px] md:place-items-center md:text-fs-500 py-10 overflow-hidden pb-15">
         <div className="relative group col-start-1 col-end-2 row-start-1 row-end-2">
           <Link
-            href="/catalog?fitler=women-wears"
+            href="/catalog?filter=women-wears"
             className="block group-hover:underline relative z-10"
           >
             Women
@@ -87,7 +87,7 @@ export default async function Home() {
 
         <div className="relative group col-start-4 col-end-5 row-start-1 row-end-2">
           <Link
-            href="/catalog?fitler=men-wears"
+            href="/catalog?filter=men-wears"
             className="block group-hover:underline relative z-10"
           >
             Men
@@ -104,7 +104,7 @@ export default async function Home() {
 
         <div className="relative group col-start-2 col-end-3 row-start-2 row-end-3">
           <Link
-            href="/catalog?fitler=sports-wears"
+            href="/catalog?filter=sportwears"
             className="block group-hover:underline relative z-10"
           >
             Sports
@@ -121,7 +121,7 @@ export default async function Home() {
 
         <div className="relative group col-start-5 col-end-6 row-start-3 row-end-4">
           <Link
-            href="/catalog?fitler=accessories"
+            href="/catalog?filter=accessories"
             className="block group-hover:underline relative z-10"
           >
             Accessories
@@ -138,7 +138,7 @@ export default async function Home() {
 
         <div className="relative group col-start-1 col-end-2 row-start-3 row-end-4">
           <Link
-            href="/catalog?fitler=watch"
+            href="/catalog?filter=watch"
             className="block group-hover:underline relative z-10"
           >
             Luxury Watch
@@ -155,7 +155,7 @@ export default async function Home() {
 
         <div className="relative group col-start-5 col-end-6 row-start-2 row-end-3">
           <Link
-            href="/catalog?fitler=women-dresses"
+            href="/catalog?filter=woman-dresses"
             className="block group-hover:underline relative z-10"
           >
             Dresses
