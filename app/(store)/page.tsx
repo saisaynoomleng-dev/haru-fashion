@@ -36,7 +36,7 @@ export default async function Home() {
           as="h1"
           className="text-[5rem] md:text-[13rem] lg:text-[15rem] text-center relative z-10 col-span-full text-brand-black col-start-1 row-start-1"
         >
-          HARU&reg;
+          HARU<sup>&reg;</sup>
         </Title>
 
         <p className="md:col-start-2 md:row-start-2 col-span-full md:row-end-3 font-semibold relative z-10 text-brand-black col-start-1 row-start-2 md:text-brand-white p-2">

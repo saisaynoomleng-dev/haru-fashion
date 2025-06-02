@@ -170,3 +170,12 @@
 .vertical-text {
   writing-mode: sideways-lr;
 }
+
+/* sign up */
+.cl-footer {
+  @apply hidden;
+}
+
+.cl-formButtonPrimary .cl-button {
+  @apply bg-red-300;
+}

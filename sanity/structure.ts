@@ -1,4 +1,4 @@
-import { LucidePhoneIncoming } from 'lucide-react';
+import { LucidePhoneIncoming, UserIcon } from 'lucide-react';
 import { CiTextAlignJustify } from 'react-icons/ci';
 import {
   FaBookOpen,
@@ -29,6 +29,5 @@ export const structure: StructureResolver = (S) =>
         .icon(LucidePhoneIncoming),
       S.documentTypeListItem('terms').title('Terms').icon(CiTextAlignJustify),
       S.documentTypeListItem('faq').title('FAQs').icon(FaQuestion),
-      S.documentTypeListItem('color').title('COlors'),
-      S.documentTypeListItem('size').title('sizes'),
+      S.documentTypeListItem('user').title('Users').icon(UserIcon),
     ]);

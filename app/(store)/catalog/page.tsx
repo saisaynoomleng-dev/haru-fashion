@@ -30,7 +30,7 @@ const CatalogPage = async ({
     minPrice: Number(minPrice) || null,
     maxPrice: Number(maxPrice) || null,
   };
-  console.log('GROQ filter params:', params);
+
   const { data: allProducts } = await sanityFetch({
     query: ALL_PRODUCTS_QUERY,
     params,
@@ -97,6 +97,11 @@ const CatalogPage = async ({
                 href={{
                   pathname: '/catalog',
                   query: {
+                    ...(filter && { filter }),
+                    ...(color && { color }),
+                    ...(size && { size }),
+                    ...(minPrice && { minPrice }),
+                    ...(maxPrice && { maxPrice }),
                     page: pageNumber,
                   },
                 }}

@@ -5,7 +5,6 @@ import ProductCard from './ProductCard';
 import Title from './Title';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { FaArrowRight } from 'react-icons/fa';
 
 const LatestProduct = async () => {
   const { data: products } = await sanityFetch({

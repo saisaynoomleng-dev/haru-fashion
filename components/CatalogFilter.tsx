@@ -88,7 +88,10 @@ const CatalogFilter = ({
               href={{
                 pathname: '/catalog',
                 query: {
-                  ...Object.fromEntries(searchParams.entries()),
+                  ...(color && { color }),
+                  ...(size && { size }),
+                  ...(minPrice && { minPrice }),
+                  ...(maxPrice && { maxPrice }),
                   filter: filter.value,
                 },
               }}
@@ -156,9 +159,9 @@ const CatalogFilter = ({
             </span>
           </p>
           <Slider
-            defaultValue={[0, 2000]}
+            defaultValue={[0, 5000]}
             min={0}
-            max={2000}
+            max={5000}
             step={100}
             //   value={[minPriceRange, maxPriceRange]}
             onValueChange={([minPriceRange, maxPriceRange]) => {
