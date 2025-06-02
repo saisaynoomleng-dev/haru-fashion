@@ -1,4 +1,3 @@
-import Form from 'next/form';
 import Link from 'next/link';
 import Newsletter from './Newsletter';
 
@@ -20,7 +19,7 @@ const SOCIAL_LINKS = [
 ];
 
 const SUPPORT_LINKS = [
-  { title: 'Account', url: '/profile' },
+  { title: 'Account', url: '/account' },
   { title: 'Return Policy', url: '/return-policy' },
   { title: 'FAQ', url: '/faq' },
 ];

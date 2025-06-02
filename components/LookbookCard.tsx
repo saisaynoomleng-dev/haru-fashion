@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import SanityImage from './SanityImage';
 import { formatDate } from '@/lib/utils';
+import Image from 'next/image';
+import { urlFor } from '@/sanity/lib/image';
 
 const LookbookCard = ({
   className,
@@ -15,11 +17,22 @@ const LookbookCard = ({
       className={clsx('grid grid-cols-2 gap-3 group', className)}
     >
       {mainImage?.asset?.url && (
-        <SanityImage
-          imageUrl={mainImage.asset.url}
-          alt={mainImage.alt as string}
-          className="group-hover:opacity-90"
-        />
+        <div className="overflow-hidden">
+          <Image
+            src={urlFor(mainImage?.asset?.url)
+              .width(1200)
+              .height(800)
+              .format('webp')
+              .url()}
+            width={1200}
+            height={800}
+            alt={mainImage?.alt as string}
+            className={clsx(
+              'w-full group-hover:scale-[1.03] transition-transform duration-300 ease-in-out rounded-sm group-hover:opacity-90',
+            )}
+            priority
+          />
+        </div>
       )}
 
       <div className="flex flex-col gap-5">

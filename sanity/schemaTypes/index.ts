@@ -13,6 +13,9 @@ import { authorType } from './utilTypes/authorType';
 import { contactType } from './contactType';
 import { termsType } from './termsType';
 import { faqType } from './faqType';
+import { userType } from './userType';
+import { favoriteType } from './favoriteType';
+import { orderType } from './orderType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +33,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactType,
     termsType,
     faqType,
+    userType,
+    favoriteType,
+    orderType,
   ],
 };
