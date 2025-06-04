@@ -127,6 +127,7 @@ const SignInPage = () => {
 
         <div className="grid grid-cols-3 place-items-center">
           <button
+            type="button"
             onClick={() => handleOAuth('oauth_facebook')}
             className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
             aria-label="Sign In with Facebook"
@@ -135,6 +136,7 @@ const SignInPage = () => {
           </button>
 
           <button
+            type="button"
             onClick={() => handleOAuth('oauth_google')}
             className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
             aria-label="Sign In with Google"
@@ -143,6 +145,7 @@ const SignInPage = () => {
           </button>
 
           <button
+            type="button"
             onClick={() => handleOAuth('oauth_apple')}
             className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
             aria-label="Sign In with Facebook"
@@ -178,7 +181,7 @@ const SignInPage = () => {
           priority
           width={600}
           height={800}
-          className=""
+          className="mx-auto"
         />
       </div>
     </Bounded>

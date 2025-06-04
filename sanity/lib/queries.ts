@@ -31,7 +31,8 @@ export const ALL_PRODUCTS_QUERY = defineQuery(`*[_type == 'product'
        price,
        colors[]->{
          colorName
-       }
+       },
+       
 }`);
 
 export const PRODUCT_QUERY = defineQuery(`*[_type == 'product'
@@ -204,3 +205,47 @@ export const LATEST_PRODUCTS_QUERY = defineQuery(`*[_type == 'product'
        colorName
      }
    }`);
+
+export const USER_QUERY = defineQuery(`*[_type == 'user'
+  && defined(clerkUserId)
+  && clerkUserId == $userId][0]{
+   firstname,
+   lastname,
+   email,
+   phone,
+   shippingAddress{
+    address1,
+    address2,
+    city,
+    state,
+    country,
+    zip
+   },
+   mainImage{
+     alt,
+     asset->{url}
+   },
+   favorites[]->{
+     product,
+   },
+   orders[]->{
+     name,  
+   }
+  }`);
+
+export const FAVORITE_QUERY = defineQuery(`*[_type == 'user'
+  && defined(clerkUserId)][0]{
+    favorites[]{
+      product->{
+        name,
+        price,
+        mainImage[]{
+          alt,
+          asset->{url}
+        },
+        slug,
+      },
+      addedAt,
+      _key
+    }
+  }`);
