@@ -14,7 +14,6 @@ import { contactType } from './contactType';
 import { termsType } from './termsType';
 import { faqType } from './faqType';
 import { userType } from './userType';
-import { favoriteType } from './favoriteType';
 import { orderType } from './orderType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -34,7 +33,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     termsType,
     faqType,
     userType,
-    favoriteType,
     orderType,
   ],
 };

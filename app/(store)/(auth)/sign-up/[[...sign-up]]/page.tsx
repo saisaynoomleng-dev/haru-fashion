@@ -26,6 +26,8 @@ const SignUpPage = () => {
     useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
 
   if (!signUpLoaded) return null;
 
@@ -39,6 +41,8 @@ const SignUpPage = () => {
       await signUp.create({
         emailAddress,
         password,
+        firstName,
+        lastName,
       });
 
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
@@ -66,7 +70,7 @@ const SignUpPage = () => {
 
       if (completeSignUp.status === 'complete') {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push('/account');
+        router.push('/');
       }
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
@@ -103,6 +107,32 @@ const SignUpPage = () => {
           <Title as="h2" size="sm" className="font-libre uppercase text-center">
             Sign Up
           </Title>
+
+          <div className="space-y-3">
+            <label htmlFor="firstname" className={LABEL_CLASS}>
+              First Name
+            </label>
+            <Input
+              type="text"
+              id="firstname"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              autoComplete="firstname"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <label htmlFor="lastname" className={LABEL_CLASS}>
+              Last Name
+            </label>
+            <Input
+              type="text"
+              id="lastname"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              autoComplete="lastname"
+            />
+          </div>
 
           <div className="space-y-3">
             <label htmlFor="email" className={LABEL_CLASS}>
@@ -152,6 +182,7 @@ const SignUpPage = () => {
 
           <div className="grid grid-cols-3 place-items-center">
             <button
+              type="button"
               onClick={() => handleOAuth('oauth_facebook')}
               className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
               aria-label="Sign In with Facebook"
@@ -160,6 +191,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              type="button"
               onClick={() => handleOAuth('oauth_google')}
               className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
               aria-label="Sign In with Google"
@@ -168,6 +200,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              type="button"
               onClick={() => handleOAuth('oauth_apple')}
               className="border p-2 rounded-lg cursor-pointer hover:text-blue-500 hover:scale-[1.03] transition-all duration-300"
               aria-label="Sign In with Facebook"

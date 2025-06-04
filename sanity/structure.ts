@@ -3,6 +3,7 @@ import { CiTextAlignJustify } from 'react-icons/ci';
 import {
   FaBookOpen,
   FaClock,
+  FaHeart,
   FaQuestion,
   FaRegNewspaper,
   FaTshirt,

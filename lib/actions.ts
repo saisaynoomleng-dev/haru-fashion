@@ -125,3 +125,91 @@ export const submitContactForm = async (
     };
   }
 };
+
+export const editProfile = async (
+  prevState: {
+    state?: string;
+    message?: string;
+    field?: string;
+    userId: string;
+  },
+  formData: FormData,
+): Promise<{
+  state?: string;
+  message?: string;
+  field?: string;
+  userId: string;
+}> => {
+  const firstname = formData.get('firstname')?.toString().trim() || '';
+  const lastname = formData.get('lastname')?.toString().trim() || '';
+  const phone = formData.get('phone')?.toString().trim() || '';
+  const address1 = formData.get('address1')?.toString().trim() || '';
+  const address2 = formData.get('address2')?.toString().trim() || '';
+  const city = formData.get('city')?.toString().trim() || '';
+  const state = formData.get('state')?.toString().trim() || '';
+  const country = formData.get('country')?.toString().trim() || '';
+  const zip = formData.get('zip')?.toString().trim() || '';
+
+  try {
+    await client
+      .patch(prevState.userId)
+      .set({
+        firstname,
+        lastname,
+        phone,
+        shippingAddress: {
+          address1,
+          address2,
+          city,
+          state,
+          country,
+          zip,
+        },
+      })
+      .commit();
+
+    return {
+      state: 'success',
+      message: 'Edit Successful',
+      userId: prevState.userId || '',
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      state: 'error',
+      message: 'Something went wrong!',
+      userId: prevState.userId || '',
+    };
+  }
+};
+
+export async function deleteFavorite(userId: string, productKey: string) {
+  try {
+    await client
+      .patch(userId)
+      .unset([`favorites[_key=="${productKey}"]`])
+      .commit();
+  } catch (error: any) {
+    console.error('Sanity error:', error.message);
+    throw new Error('Failed to delete favorite');
+  }
+}
+
+export async function addFavorite(userId: string, productId: string) {
+  const now = new Date().toISOString();
+  try {
+    await client
+      .patch(userId)
+      .setIfMissing({ favorites: [] })
+      .append('favorites', [
+        {
+          _type: 'object',
+          product: { _type: 'reference', _ref: productId },
+          addedAt: now,
+        },
+      ])
+      .commit({ autoGenerateArrayKeys: true });
+  } catch (error: any) {
+    console.error(error.message);
+  }
+}

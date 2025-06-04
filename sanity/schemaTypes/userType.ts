@@ -1,5 +1,5 @@
 import { UserIcon } from 'lucide-react';
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const userType = defineType({
   name: 'user',
@@ -92,7 +92,45 @@ export const userType = defineType({
       name: 'favorites',
       title: 'Favorite Lists',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'favorite' }] }],
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'product',
+              type: 'reference',
+              to: [{ type: 'product' }],
+            }),
+            defineField({
+              name: 'addedAt',
+              type: 'date',
+              initialValue: new Date().toISOString(),
+            }),
+          ],
+          preview: {
+            select: {
+              name: 'product.name',
+              price: 'product.price',
+              image: 'product.mainImage.0.asset',
+              addedAt: 'addedAt',
+            },
+            prepare({ name, price, image, addedAt }) {
+              const dateFormatted =
+                addedAt &&
+                new Date(addedAt).toLocaleDateString('en-US', {
+                  day: '2-digit',
+                  month: 'short',
+                  year: 'numeric',
+                });
+              return {
+                title: name,
+                subtitle: `$${price} | ${dateFormatted}`,
+                media: image,
+              };
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'orders',

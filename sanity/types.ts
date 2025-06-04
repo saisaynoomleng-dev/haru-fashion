@@ -68,6 +68,66 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Order = {
+  _id: string;
+  _type: 'order';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+};
+
+export type User = {
+  _id: string;
+  _type: 'user';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstname?: string;
+  lastname?: string;
+  clerkUserId?: string;
+  email?: string;
+  shippingAddress?: {
+    address1?: string;
+    address2?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    zip?: string;
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+  favorites?: Array<{
+    product?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'product';
+    };
+    addedAt?: string;
+    _key: string;
+  }>;
+  orders?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'order';
+  }>;
+  phone?: string;
+};
+
 export type Faq = {
   _id: string;
   _type: 'faq';
@@ -494,6 +554,8 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Order
+  | User
   | Faq
   | Terms
   | Contact
@@ -517,7 +579,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: ALL_PRODUCTS_QUERY
-// Query: *[_type == 'product'    && defined(slug.current)    && (      (!defined($filter)) ||      $filter == null ||      $filter in categories[]->slug.current    )    && (      (!defined($color)) ||      $color == null ||      $color in colors[]->slug.current    )    && (      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)    )    && (      (!defined($size)) ||      $size == null ||      $size in sizes[]->slug.current    )      ]| order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       }}
+// Query: *[_type == 'product'    && defined(slug.current)    && (      (!defined($filter)) ||      $filter == null ||      $filter in categories[]->slug.current    )    && (      (!defined($color)) ||      $color == null ||      $color in colors[]->slug.current    )    && (      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)    )    && (      (!defined($size)) ||      $size == null ||      $size in sizes[]->slug.current    )      ]| order(dateAdded desc){       name,       mainImage[]{         asset->{url},         alt       },       slug,       price,       colors[]->{         colorName       },       }
 export type ALL_PRODUCTS_QUERYResult = Array<{
   name: string | null;
   mainImage: Array<{
@@ -885,12 +947,57 @@ export type LATEST_PRODUCTS_QUERYResult = Array<{
     colorName: string | null;
   }> | null;
 }>;
+// Variable: USER_QUERY
+// Query: *[_type == 'user'  && defined(clerkUserId)  && clerkUserId == $userId][0]{   firstname,   lastname,   email,   phone,   shippingAddress{    address1,    address2,    city,    state,    country,    zip   },   mainImage{     alt,     asset->{url}   },   favorites[]->{     product,   },   orders[]->{     name,     }  }
+export type USER_QUERYResult = {
+  firstname: string | null;
+  lastname: string | null;
+  email: string | null;
+  phone: string | null;
+  shippingAddress: {
+    address1: string | null;
+    address2: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zip: string | null;
+  } | null;
+  mainImage: {
+    alt: string | null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+  favorites: Array<null> | null;
+  orders: Array<{
+    name: string | null;
+  }> | null;
+} | null;
+// Variable: FAVORITE_QUERY
+// Query: *[_type == 'user'  && defined(clerkUserId)][0]{    favorites[]{      product->{        name,        price,        mainImage[]{          alt,          asset->{url}        },        slug,      },      addedAt,      _key    }  }
+export type FAVORITE_QUERYResult = {
+  favorites: Array<{
+    product: {
+      name: string | null;
+      price: number | null;
+      mainImage: Array<{
+        alt: string | null;
+        asset: {
+          url: string | null;
+        } | null;
+      }> | null;
+      slug: Slug | null;
+    } | null;
+    addedAt: string | null;
+    _key: string;
+  }> | null;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == 'product'\n    && defined(slug.current)\n    && (\n      (!defined($filter)) ||\n      $filter == null ||\n      $filter in categories[]->slug.current\n    )\n    && (\n      (!defined($color)) ||\n      $color == null ||\n      $color in colors[]->slug.current\n    )\n    && (\n      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&\n      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)\n    )\n    && (\n      (!defined($size)) ||\n      $size == null ||\n      $size in sizes[]->slug.current\n    )\n      ]| order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       }\n}": ALL_PRODUCTS_QUERYResult;
+    "*[_type == 'product'\n    && defined(slug.current)\n    && (\n      (!defined($filter)) ||\n      $filter == null ||\n      $filter in categories[]->slug.current\n    )\n    && (\n      (!defined($color)) ||\n      $color == null ||\n      $color in colors[]->slug.current\n    )\n    && (\n      (!defined($minPrice) || $minPrice == null || price >= $minPrice) &&\n      (!defined($maxPrice) || $maxPrice == null || price <= $maxPrice)\n    )\n    && (\n      (!defined($size)) ||\n      $size == null ||\n      $size in sizes[]->slug.current\n    )\n      ]| order(dateAdded desc){\n       name,\n       mainImage[]{\n         asset->{url},\n         alt\n       },\n       slug,\n       price,\n       colors[]->{\n         colorName\n       },\n       \n}": ALL_PRODUCTS_QUERYResult;
     "*[_type == 'product'\n  && slug.current == $slug][0]{\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     _id,\n     price,\n     colors[]->{\n       colorName\n     },\n     sizes[]->{\n      name\n     },\n     desc,\n     categories[]->{\n      name,\n      _id,\n     },\n}": PRODUCT_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)\n  && _id != $currentProductId\n  && count(categories[@._ref in $categoryIds]) > 0 ]\n   | order(dateAdded desc){\n     name,\n     mainImage[]{\n       asset->{url},\n       alt\n     },\n     slug,\n     price,\n     colors[]->{\n       colorName\n     }\n}": RELATED_PRODUCTS_QUERYResult;
     "*[_type == 'history'\n  && defined(slug.current)][0]{\n   title,\n   slug,\n   histories[]{\n     title,\n     desc,\n     year,\n     mainImage{\n       asset->{url},\n     alt\n     }\n   }\n  }": HISTORY_QUERYResult;
@@ -903,5 +1010,7 @@ declare module '@sanity/client' {
     "*[_type == 'faq'\n  && slug.current == 'main-faqs'][0]{\n   faqs[]{\n     question,\n     answer\n   }\n  }": MAIN_FAQ_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)\n  && (\n    (!defined($search)) || \n    name match $search || \n    categories[]->name match $search ||\n    colors[]->colorName match $search\n  )\n  ] | order(dateAdded desc){\n    name,\n    slug,\n    _id,\n    mainImage[]{\n      asset->{url},\n      alt\n    },\n    price,\n    colors[]->{\n      colorName\n    },\n    category[]{\n      name\n    }\n  }": SEARCH_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)][0...3] \n   | order(dateAdded desc){\n     name,\n     slug,\n     mainImage[]{\n       alt,\n       asset->{url}\n     },\n     price,\n     colors[]->{\n       colorName\n     }\n   }": LATEST_PRODUCTS_QUERYResult;
+    "*[_type == 'user'\n  && defined(clerkUserId)\n  && clerkUserId == $userId][0]{\n   firstname,\n   lastname,\n   email,\n   phone,\n   shippingAddress{\n    address1,\n    address2,\n    city,\n    state,\n    country,\n    zip\n   },\n   mainImage{\n     alt,\n     asset->{url}\n   },\n   favorites[]->{\n     product,\n   },\n   orders[]->{\n     name,  \n   }\n  }": USER_QUERYResult;
+    "*[_type == 'user'\n  && defined(clerkUserId)][0]{\n    favorites[]{\n      product->{\n        name,\n        price,\n        mainImage[]{\n          alt,\n          asset->{url}\n        },\n        slug,\n      },\n      addedAt,\n      _key\n    }\n  }": FAVORITE_QUERYResult;
   }
 }

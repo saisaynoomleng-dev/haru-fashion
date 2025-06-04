@@ -8,12 +8,16 @@ import { PortableText } from 'next-sanity';
 import Link from 'next/link';
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
+import AddFav from '@/components/AddFav';
+import { auth } from '@clerk/nextjs/server';
 
 const ProductDetailPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
+  const { userId } = await auth();
+
   const { data: product } = await sanityFetch({
     query: PRODUCT_QUERY,
     params: await params,
@@ -48,7 +52,7 @@ const ProductDetailPage = async ({
           {product?.name}
         </Title>
 
-        <p className="text-fs-400">$ {product?.price}</p>
+        <p className="text-fs-400">$ {product?.price?.toLocaleString()}</p>
 
         <div className="grid grid-cols-2 gap-2">
           <p>Size: </p>
@@ -81,6 +85,13 @@ const ProductDetailPage = async ({
         </div>
 
         {/* add to cart and fav */}
+        <div className="flex gap-2">
+          <AddFav
+            userId={userId as string}
+            productId={product?._id as string}
+          />
+          <button>Add to bag</button>
+        </div>
       </div>
 
       {product?.desc && (
