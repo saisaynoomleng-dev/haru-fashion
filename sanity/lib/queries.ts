@@ -234,7 +234,8 @@ export const USER_QUERY = defineQuery(`*[_type == 'user'
   }`);
 
 export const FAVORITE_QUERY = defineQuery(`*[_type == 'user'
-  && defined(clerkUserId)][0]{
+  && defined(clerkUserId)
+  && clerkUserId == $userId][0]{
     favorites[]{
       product->{
         name,
