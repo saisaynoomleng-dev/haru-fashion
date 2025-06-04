@@ -24,7 +24,7 @@ const SearchPage = async ({
 
   const currentPage = parseInt(page || '1', 10);
   const totalProducts = allProducts.length;
-  const pageSize = 2;
+  const pageSize = 12;
   const totalPages = Math.ceil(totalProducts / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;

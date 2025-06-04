@@ -1,3 +1,4 @@
+import AddBag from '@/components/AddBag';
 import Bounded from '@/components/Bounded';
 import DeleteFav from '@/components/DeleteFav';
 import SanityImage from '@/components/SanityImage';
@@ -68,7 +69,10 @@ const FavoritePage = async () => {
                   <Button>Check Product</Button>
                 </Link>
 
-                <DeleteFav userId={userId} productKey={fav._key} />
+                <div className="flex gap-2">
+                  <AddBag userId={userId} productId={fav.product?._id || ''} />
+                  <DeleteFav userId={userId} productKey={fav._key} />
+                </div>
               </div>
             </div>
           );

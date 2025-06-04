@@ -3,6 +3,7 @@
 import { deleteFavorite } from '@/lib/actions';
 import clsx from 'clsx';
 import { Button } from './ui/button';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const DeleteFav = ({
   userId,
@@ -26,7 +27,7 @@ const DeleteFav = ({
       onClick={deleteFav}
       className={clsx(' bg-red-900 text-brand-white', className)}
     >
-      DeleteFav
+      <FaTrashAlt />
     </Button>
   );
 };

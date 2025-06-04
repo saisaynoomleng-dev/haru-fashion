@@ -245,8 +245,26 @@ export const FAVORITE_QUERY = defineQuery(`*[_type == 'user'
           asset->{url}
         },
         slug,
+        _id
       },
       addedAt,
+      _key
+    }
+  }`);
+
+export const ORDERS_QUERY = defineQuery(`*[_type == 'user'
+  && defined(clerkUserId)
+  && clerkUserId == $userId][0]{
+    bags[]{
+      product->{
+        name,
+        price,
+        mainImage[]{
+          alt,
+          asset->{url}
+        },
+        slug,
+      },
       _key
     }
   }`);
