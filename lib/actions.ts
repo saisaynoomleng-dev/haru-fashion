@@ -2,6 +2,7 @@
 
 import { client } from '@/sanity/lib/client';
 import { PrevFormStateProps } from './types';
+import { revalidatePath } from 'next/cache';
 
 export const submitNewsletter = async (
   prevState: PrevFormStateProps,
@@ -35,6 +36,7 @@ export const submitNewsletter = async (
       message: 'Thank you for your subscription',
     };
   } catch (err) {
+    console.error(err);
     return {
       state: 'error',
       message: 'Something went Wrong! Try again later!',
@@ -196,20 +198,72 @@ export async function deleteFavorite(userId: string, productKey: string) {
 }
 
 export async function addFavorite(userId: string, productId: string) {
+  const user = await client.getDocument(userId);
+  const favs = user?.favorites || [];
+  const alreadyExists = favs.some(
+    (item: any) => item.product?._ref === productId,
+  );
   const now = new Date().toISOString();
+
   try {
-    await client
-      .patch(userId)
-      .setIfMissing({ favorites: [] })
-      .append('favorites', [
-        {
-          _type: 'object',
-          product: { _type: 'reference', _ref: productId },
-          addedAt: now,
-        },
-      ])
-      .commit({ autoGenerateArrayKeys: true });
+    if (!alreadyExists) {
+      await client
+        .patch(userId)
+        .setIfMissing({ favorites: [] })
+        .append('favorites', [
+          {
+            _type: 'object',
+            product: { _type: 'reference', _ref: productId },
+            addedAt: now,
+          },
+        ])
+        .commit({ autoGenerateArrayKeys: true });
+
+      revalidatePath('/account/favorite');
+    } else {
+      return;
+    }
   } catch (error: any) {
     console.error(error.message);
   }
 }
+
+export const addBag = async (userId: string, productId: string) => {
+  const user = await client.getDocument(userId);
+  const bags = user?.bags || [];
+
+  const alreadyExists = bags.some(
+    (item: any) => item.product?._ref === productId,
+  );
+
+  try {
+    if (!alreadyExists) {
+      await client
+        .patch(userId)
+        .setIfMissing({ bags: [] })
+        .append('bags', [
+          {
+            _type: 'object',
+            product: { _type: 'reference', _ref: productId },
+          },
+        ])
+        .commit({ autoGenerateArrayKeys: true });
+      revalidatePath('/account/order');
+    } else {
+      return;
+    }
+  } catch (err: any) {
+    console.error(err.message);
+  }
+};
+
+export const removeBag = async (userId: string, productKey: string) => {
+  try {
+    await client
+      .patch(userId)
+      .unset([`bags[_key=="${productKey}"]`])
+      .commit();
+  } catch (err: any) {
+    console.error(err.message);
+  }
+};

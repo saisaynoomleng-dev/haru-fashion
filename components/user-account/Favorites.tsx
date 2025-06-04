@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/sanity/lib/live';
-import { FAVORITE_QUERY, USER_QUERY } from '@/sanity/lib/queries';
+import { FAVORITE_QUERY } from '@/sanity/lib/queries';
 import { auth } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
@@ -7,6 +7,7 @@ import SanityImage from '../SanityImage';
 import { formatDate } from '@/lib/utils';
 import DeleteFav from '../DeleteFav';
 import { Button } from '../ui/button';
+import AddBag from '../AddBag';
 
 const Favorites = async () => {
   const { userId } = await auth();
@@ -62,7 +63,11 @@ const Favorites = async () => {
               >
                 <Button>Check Product</Button>
               </Link>
-              <DeleteFav userId={userId} productKey={fav._key} />
+
+              <div className="flex gap-2">
+                <AddBag userId={userId} productId={fav.product?._id || ''} />
+                <DeleteFav userId={userId} productKey={fav._key} />
+              </div>
             </div>
           </div>
         );

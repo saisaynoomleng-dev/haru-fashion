@@ -139,6 +139,37 @@ export const userType = defineType({
       of: [{ type: 'reference', to: [{ type: 'order' }] }],
     }),
     defineField({
+      name: 'bags',
+      title: 'Bags',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'product',
+              type: 'reference',
+              to: [{ type: 'product' }],
+            }),
+          ],
+          preview: {
+            select: {
+              name: 'product.name',
+              price: 'product.price',
+              image: 'product.mainImage.0.asset',
+            },
+            prepare({ name, price, image }) {
+              return {
+                title: name,
+                subtitle: `$${price}`,
+                media: image,
+              };
+            },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'phone',
       title: 'Phone',
       type: 'string',

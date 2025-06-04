@@ -12,3 +12,10 @@ export const formatDate = (date: string) => {
     day: '2-digit',
   });
 };
+
+export const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(amount);
+};

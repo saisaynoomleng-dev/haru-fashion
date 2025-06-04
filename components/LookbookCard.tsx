@@ -1,7 +1,6 @@
 import { LOOKBOOKS_QUERYResult } from '@/sanity/types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import SanityImage from './SanityImage';
 import { formatDate } from '@/lib/utils';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';

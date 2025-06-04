@@ -10,6 +10,8 @@ import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import AddFav from '@/components/AddFav';
 import { auth } from '@clerk/nextjs/server';
+import AddBag from '@/components/AddBag';
+import { formatCurrency } from '@/lib/utils';
 
 const ProductDetailPage = async ({
   params,
@@ -52,7 +54,7 @@ const ProductDetailPage = async ({
           {product?.name}
         </Title>
 
-        <p className="text-fs-400">$ {product?.price?.toLocaleString()}</p>
+        <p className="text-fs-400">{formatCurrency(product?.price ?? 0)}</p>
 
         <div className="grid grid-cols-2 gap-2">
           <p>Size: </p>
@@ -84,13 +86,15 @@ const ProductDetailPage = async ({
           </p>
         </div>
 
-        {/* add to cart and fav */}
         <div className="flex gap-2">
           <AddFav
             userId={userId as string}
             productId={product?._id as string}
           />
-          <button>Add to bag</button>
+          <AddBag
+            userId={userId as string}
+            productId={product?._id as string}
+          />
         </div>
       </div>
 
@@ -100,7 +104,7 @@ const ProductDetailPage = async ({
         </div>
       )}
 
-      <div className="space-y-3 md:space-y-5 col-span-full">
+      <div className="space-y-3 md:space-y-5 col-span-full overflow-x-hidden">
         <Title as="h3" size="sm" className="underline underline-offset-2 ">
           Related Products
         </Title>
@@ -109,7 +113,7 @@ const ProductDetailPage = async ({
             <ProductCard
               key={product.slug?.current}
               {...product}
-              className="min-w-[200px]"
+              className="min-w-[200px] max-w-[240px]"
             />
           ))}
         </div>

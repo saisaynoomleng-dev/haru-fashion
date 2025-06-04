@@ -2,6 +2,7 @@ import { ALL_PRODUCTS_QUERYResult } from '@/sanity/types';
 import Link from 'next/link';
 import SanityImage from './SanityImage';
 import clsx from 'clsx';
+import { formatCurrency } from '@/lib/utils';
 
 const ProductCard = ({
   className,
@@ -37,7 +38,7 @@ const ProductCard = ({
         </div>
 
         <p className="uppercase text-fs-200 ">{name}</p>
-        <p>$ {price?.toLocaleString()}</p>
+        <p>{formatCurrency(price ?? 0)}</p>
       </div>
     </Link>
   );
