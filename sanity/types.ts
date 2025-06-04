@@ -974,7 +974,7 @@ export type USER_QUERYResult = {
   }> | null;
 } | null;
 // Variable: FAVORITE_QUERY
-// Query: *[_type == 'user'  && defined(clerkUserId)][0]{    favorites[]{      product->{        name,        price,        mainImage[]{          alt,          asset->{url}        },        slug,      },      addedAt,      _key    }  }
+// Query: *[_type == 'user'  && defined(clerkUserId)  && clerkUserId == $userId][0]{    favorites[]{      product->{        name,        price,        mainImage[]{          alt,          asset->{url}        },        slug,      },      addedAt,      _key    }  }
 export type FAVORITE_QUERYResult = {
   favorites: Array<{
     product: {
@@ -1011,6 +1011,6 @@ declare module '@sanity/client' {
     "*[_type == 'product'\n  && defined(slug.current)\n  && (\n    (!defined($search)) || \n    name match $search || \n    categories[]->name match $search ||\n    colors[]->colorName match $search\n  )\n  ] | order(dateAdded desc){\n    name,\n    slug,\n    _id,\n    mainImage[]{\n      asset->{url},\n      alt\n    },\n    price,\n    colors[]->{\n      colorName\n    },\n    category[]{\n      name\n    }\n  }": SEARCH_QUERYResult;
     "*[_type == 'product'\n  && defined(slug.current)][0...3] \n   | order(dateAdded desc){\n     name,\n     slug,\n     mainImage[]{\n       alt,\n       asset->{url}\n     },\n     price,\n     colors[]->{\n       colorName\n     }\n   }": LATEST_PRODUCTS_QUERYResult;
     "*[_type == 'user'\n  && defined(clerkUserId)\n  && clerkUserId == $userId][0]{\n   firstname,\n   lastname,\n   email,\n   phone,\n   shippingAddress{\n    address1,\n    address2,\n    city,\n    state,\n    country,\n    zip\n   },\n   mainImage{\n     alt,\n     asset->{url}\n   },\n   favorites[]->{\n     product,\n   },\n   orders[]->{\n     name,  \n   }\n  }": USER_QUERYResult;
-    "*[_type == 'user'\n  && defined(clerkUserId)][0]{\n    favorites[]{\n      product->{\n        name,\n        price,\n        mainImage[]{\n          alt,\n          asset->{url}\n        },\n        slug,\n      },\n      addedAt,\n      _key\n    }\n  }": FAVORITE_QUERYResult;
+    "*[_type == 'user'\n  && defined(clerkUserId)\n  && clerkUserId == $userId][0]{\n    favorites[]{\n      product->{\n        name,\n        price,\n        mainImage[]{\n          alt,\n          asset->{url}\n        },\n        slug,\n      },\n      addedAt,\n      _key\n    }\n  }": FAVORITE_QUERYResult;
   }
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Bounded from './Bounded';
 import clsx from 'clsx';
 import { useClerk } from '@clerk/nextjs';
+import { Button } from './ui/button';
 
 type Tab = {
   title: string;
@@ -33,12 +34,12 @@ const UserTabs = ({ tabs }: TabProps) => {
             {tab.title}
           </button>
         ))}
-        <button
-          onClick={() => signOut({ redirectUrl: '/' })}
+        <Button
+          onClick={() => signOut({ redirectUrl: '/account' })}
           className="md:text-left px-2 md:px-5 md:ml-5 font-bold border md:self-start bg-red-900 text-brand-white"
         >
           Sign Out
-        </button>
+        </Button>
       </div>
 
       <div>{tabs[activeIndex].content}</div>
