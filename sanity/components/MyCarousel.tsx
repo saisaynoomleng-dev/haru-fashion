@@ -41,7 +41,11 @@ const MyCarousel: React.FC<MyCarouselProps> = ({ images }) => {
           <MdNavigateBefore className="size-10" />
         </button>
         <Image
-          src={urlFor(images[currentIndex].asset._ref).format('webp').url()}
+          src={urlFor(images[currentIndex].asset._ref)
+            .format('webp')
+            .width(500)
+            .height(800)
+            .url()}
           alt={images[currentIndex].alt as string}
           width={200}
           height={400}
@@ -61,8 +65,8 @@ const MyCarousel: React.FC<MyCarouselProps> = ({ images }) => {
           <button key={i} onClick={() => setCurrentIndex(i)}>
             <Image
               src={urlFor(img.asset._ref)
-                .width(100)
-                .height(200)
+                .width(400)
+                .height(600)
                 .format('webp')
                 .url()}
               alt={img.alt as string}

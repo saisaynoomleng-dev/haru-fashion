@@ -19,3 +19,13 @@ export type PrevFormStateProps = {
   message: string;
   field?: string;
 };
+
+// Slide In Effect
+export type SlideInProps = {
+  delay?: number;
+  duration?: number;
+  direction?: 'top' | 'bottom' | 'left' | 'right';
+  offset?: number;
+  className?: string;
+  children: React.ReactNode;
+};
