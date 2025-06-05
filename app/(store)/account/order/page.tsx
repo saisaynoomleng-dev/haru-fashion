@@ -25,7 +25,7 @@ const OrderPage = async () => {
 
   let TAX = 0;
   if (productTotal) {
-    TAX = (productTotal * 0.1) as number;
+    TAX = (productTotal * 0.07) as number;
   }
 
   const TOTAL_PRICE = productTotal && productTotal + TAX;
