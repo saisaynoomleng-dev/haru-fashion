@@ -15,13 +15,15 @@ const ContactUsPage = () => {
         <ContactForm />
       </div>
 
-      <Image
-        src="/contact.jpg"
-        className="flex-1"
-        width={400}
-        height={600}
-        alt=""
-      />
+      <div className="add-padding">
+        <Image
+          src="/contact.jpg"
+          className="flex-1 mx-auto"
+          width={400}
+          height={600}
+          alt=""
+        />
+      </div>
     </Bounded>
   );
 };

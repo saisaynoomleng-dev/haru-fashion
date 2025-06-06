@@ -151,7 +151,7 @@ export default async function Home() {
               height={400}
               alt=""
               priority
-              className="max-w-50 rounded-sm"
+              className="max-w-40 md:max-w-50 rounded-sm"
             />
           </SlideInEffect>
 

@@ -36,13 +36,13 @@ const Favorites = async () => {
         return (
           <div
             key={fav.product?.slug?.current}
-            className="border p-2 border-brand-black/10 rounded-sm grid grid-cols-[100px_1fr_auto] gap-x-2"
+            className="border p-2 border-brand-black/10 rounded-sm grid grid-cols-2 md:grid-cols-[100px_1fr_auto] gap-x-2"
           >
             {mainImage && (
               <SanityImage
                 imageUrl={imageUrl}
                 alt={altText}
-                className="max-w-[100px]"
+                className=" row-start-1 row-end-3"
               />
             )}
 
@@ -56,7 +56,7 @@ const Favorites = async () => {
               </p>
             </div>
 
-            <div className="flex flex-col justify-end gap-2">
+            <div className="flex flex-col justify-end gap-2 place-self-end md:col-start-3 col-start-2 ">
               <Link
                 href={`catalog/${fav.product?.slug?.current}`}
                 className="bg-blue-400 text-brand-white rounded-sm"

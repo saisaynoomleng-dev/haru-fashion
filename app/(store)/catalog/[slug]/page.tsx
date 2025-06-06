@@ -42,7 +42,7 @@ const ProductDetailPage = async ({
       <div className="flex flex-col gap-2 md:max-w-[85%] lg:max-w-[80%] px-6 md:px-8">
         <Link
           href="/catalog"
-          className="text-fs-200 uppercase flex gap-2 group items-center"
+          className="text-fs-200 uppercase flex gap-2 group items-center underline underline-offset-2 font-semibold"
         >
           <FaArrowLeft className="size-3 ml-2 group-hover:ml-0 transition-all duration-300 ease" />
           <span className="ml-2 group-hover:ml-4 transition-all duration-300">

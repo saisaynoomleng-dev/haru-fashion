@@ -42,11 +42,14 @@ const AboutUsPage = async () => {
         >
           <p>With</p>
         </SlideInEffect>
-        <LetterTextFlow className="text-[3rem] md:text-[4rem] lg:text-[6rem] col-start-2 row-start-5 col-span-full md:col-end-8 uppercase">
+        <Title
+          as="h1"
+          className="text-[3rem] md:text-[4rem] lg:text-[6rem] col-start-2 row-start-5 col-span-full md:col-end-8 uppercase text-pretty"
+        >
           Two Ways of shopping
-        </LetterTextFlow>
+        </Title>
 
-        <LineTextFlowEffect className="text-[0.75rem col-start-3 col-end-7 row-start-6 md:col-start-8 md:col-end-13 text-justify">
+        <LineTextFlowEffect className="text-[0.75rem col-start-3 col-end-7 row-start-6 md:col-start-8 md:col-end-13">
           Haru&reg; shops around the world are characterized by their strategic
           locations and detailed architechture.Establishments are turned into
           spacious, trend-setting spaces with a carefully conceived image that
@@ -257,7 +260,7 @@ const AboutUsPage = async () => {
               className="mx-auto"
             />
           </ImageFillIn>
-          <LineTextFlowEffect className="md:text-center">
+          <LineTextFlowEffect className="text-center">
             As an iternational fashion, homeware and beauty business, what we do
             and how we do it has an impact on the people and the world around
             us. Our stakeholder relationshiops are key to our success and inform
@@ -266,7 +269,7 @@ const AboutUsPage = async () => {
             valued-doing the right thing.
           </LineTextFlowEffect>
 
-          <LineTextFlowEffect className="md:text-center">
+          <LineTextFlowEffect className="text-center">
             Our six main raw materials are cotton, polyester, man-made
             cellulosics(such as viscose), wool, timber and leather. Our aim by
             2025, is to only use responsibly sourced materials from more
