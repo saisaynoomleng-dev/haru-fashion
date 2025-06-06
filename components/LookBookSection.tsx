@@ -20,7 +20,7 @@ const LookBookSection = ({ books }: LookBookSectionProps) => {
 
       <SlideInGroup
         direction="top"
-        className="min-w-full flex justify-center items-center gap-3 relative"
+        className="min-w-full flex justify-center items-center gap-3 overflow-x-hidden"
       >
         {books.map((book) => (
           <Link

@@ -191,6 +191,7 @@ export async function deleteFavorite(userId: string, productKey: string) {
       .patch(userId)
       .unset([`favorites[_key=="${productKey}"]`])
       .commit();
+    revalidatePath('/account/favorite');
   } catch (error: any) {
     console.error('Sanity error:', error.message);
     throw new Error('Failed to delete favorite');
@@ -263,6 +264,7 @@ export const removeBag = async (userId: string, productKey: string) => {
       .patch(userId)
       .unset([`bags[_key=="${productKey}"]`])
       .commit();
+    revalidatePath('/account/order');
   } catch (err: any) {
     console.error(err.message);
   }

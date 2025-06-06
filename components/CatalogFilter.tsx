@@ -81,9 +81,9 @@ const CatalogFilter = ({
 
   return (
     <div className="flex flex-col gap-4 add-padding">
-      <div className="flex gap-3 items-center justify-center">
+      <div className="flex gap-3 items-center justify-center p">
         {FILTERS.map((filter) => (
-          <button key={filter.value}>
+          <button key={filter.value} className="text-xs md:text-fs-300">
             <Link
               href={{
                 pathname: '/catalog',
